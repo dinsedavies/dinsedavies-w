@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dinse Davies</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:#d9d0c4;
+      overflow-x:hidden;
+      color:#2d221c;
+    }
+
+    ::selection{
+      background:#3b2417;
+      color:white;
+    }
+
+    /* SCROLLBAR */
+
+    ::-webkit-scrollbar{
+      width:8px;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:#6d4b37;
+      border-radius:20px;
+    }
+
+    /* HERO */
+
+    .hero{
+      position:relative;
+      width:100%;
+      height:100vh;
+      overflow:hidden;
+    }
+
+    .hero img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+
+      /* KEEPING YOUR PERFECT IMAGE POSITION */
+      object-position:center 5%;
+
+      filter:
+      brightness(0.95)
+      contrast(1.03)
+      saturate(1.04);
+
+      animation:heroFloat 7s ease-in-out infinite;
+    }
+
+    .overlay{
+      position:absolute;
+      inset:0;
+
+      background:
+      linear-gradient(
+      to right,
+      rgba(41,28,20,0.30),
+      rgba(140,120,100,0.10)
+      );
+    }
+
+    /* NAVBAR */
+
+    nav{
+      position:absolute;
+      top:30px;
+      left:50%;
+      transform:translateX(-50%);
+      width:94%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      z-index:100;
+    }
+
+    .nav-left{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .nav-btn{
+      padding:12px 24px;
+      border-radius:50px;
+      background:rgba(30,22,18,0.82);
+      border:1px solid rgba(255,255,255,0.12);
+      color:white;
+      text-decoration:none;
+      font-size:0.95rem;
+      backdrop-filter:blur(10px);
+      transition:0.35s;
+    }
+
+    .nav-btn:hover{
+      background:#efe7dc;
+      color:#2b1d14;
+      transform:translateY(-2px);
+    }
+
+    /* MOBILE MENU */
+
+    .mobile-toggle{
+      display:none;
+      position:absolute;
+      top:30px;
+      right:25px;
+      width:52px;
+      height:52px;
+      border-radius:50%;
+      background:rgba(15,15,15,0.85);
+      color:white;
+      font-size:1.5rem;
+      z-index:999;
+      justify-content:center;
+      align-items:center;
+      cursor:pointer;
+      backdrop-filter:blur(10px);
+    }
+
+    /* HERO CONTENT */
+
+    .hero-content{
+      position:relative;
+      z-index:10;
+      height:100%;
+      padding:150px 60px 70px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      animation:fadeUp 1.2s ease;
+    }
+
+    .top-right{
+      position:absolute;
+      right:7%;
+      top:34%;
+      color:white;
+      font-size:1.5rem;
+      line-height:1.8;
+      font-weight:300;
+    }
+
+    .hero-bottom{
+      display:flex;
+      flex-direction:column;
+      gap:25px;
+    }
+
+    .name{
+      font-size:11vw;
+      line-height:0.84;
+      font-weight:900;
+      color:#f5eee6;
+      letter-spacing:-9px;
+      text-transform:uppercase;
+      text-shadow:
+      0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .bottom-name{
+      margin-top:-20px;
+    }
+
+    .hero-actions{
+      margin-top:10px;
+    }
+
+    .download-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      padding:18px 34px;
+      border-radius:50px;
+      background:#5c4030;
+      color:white;
+      text-decoration:none;
+      font-weight:600;
+      transition:0.35s;
+      box-shadow:0 10px 30px rgba(0,0,0,0.12);
+    }
+
+    .download-btn:hover{
+      transform:translateY(-4px);
+      background:#2d1d14;
+    }
+
+    /* SECTION */
+
+    section{
+      padding:120px 8%;
+    }
+
+    .section-title{
+      font-size:4rem;
+      margin-bottom:60px;
+      font-weight:800;
+      color:#4a3427;
+    }
+
+    /* ABOUT */
+
+    .about{
+      background:#d9d0c4;
+    }
+
+    .about-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:50px;
+      align-items:center;
+    }
+
+    .about-text h5{
+      color:#8a6248;
+      margin-bottom:10px;
+      font-size:1rem;
+      letter-spacing:1px;
+      text-transform:uppercase;
+    }
+
+    .about-text p{
+      font-size:1.1rem;
+      line-height:2;
+      color:#5f4a3f;
+    }
+
+    .quote-card{
+      background:#f6f0e8;
+      padding:50px;
+      border-radius:30px;
+      box-shadow:0 15px 40px rgba(0,0,0,0.06);
+      transition:0.4s;
+      border:1px solid rgba(90,65,45,0.06);
+    }
+
+    .quote-card:hover{
+      transform:translateY(-8px);
+    }
+
+    .quote{
+      font-size:4rem;
+      color:#b88a69;
+      line-height:1;
+      margin-bottom:15px;
+    }
+
+    .quote-card p{
+      line-height:2;
+      color:#5f4a3f;
+    }
+
+    /* EXPERIENCE */
+
+    .experience{
+      background:#ece2d6;
+    }
+
+    .exp-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:28px;
+    }
+
+    .exp-card{
+      background:#f6f0e8;
+      border-radius:26px;
+      padding:35px;
+      transition:0.4s;
+      box-shadow:0 10px 30px rgba(0,0,0,0.05);
+      border:1px solid rgba(90,65,45,0.06);
+    }
+
+    .exp-card:hover{
+      transform:translateY(-10px);
+      box-shadow:0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    .exp-card h3{
+      margin:15px 0 8px;
+      font-size:1.5rem;
+      color:#3c2a1f;
+    }
+
+    .exp-card span{
+      color:#8b6a55;
+      font-size:0.95rem;
+    }
+
+    .exp-card p{
+      margin-top:18px;
+      line-height:1.9;
+      color:#5f4a3f;
+    }
+
+    /* SKILLS */
+
+    .skills{
+      background:#d4cabd;
+    }
+
+    .skills-wrap{
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px;
+    }
+
+    .skill{
+      padding:16px 28px;
+      border-radius:50px;
+      background:#f6f0e8;
+      box-shadow:0 8px 20px rgba(0,0,0,0.05);
+      font-weight:500;
+      transition:0.35s;
+      border:1px solid rgba(90,65,45,0.06);
+    }
+
+    .skill:hover{
+      transform:translateY(-5px);
+      background:#4b3426;
+      color:white;
+    }
+
+    /* CONTACT */
+
+    .contact{
+      background:#34241a;
+      color:white;
+    }
+
+    .contact-container{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:40px;
+    }
+
+    .contact-left h2{
+      font-size:3.5rem;
+      margin-bottom:20px;
+    }
+
+    .contact-left p{
+      color:#d9c6b8;
+      line-height:2;
+      font-size:1.1rem;
+    }
+
+    .contact-btn{
+      display:inline-block;
+      padding:18px 38px;
+      background:#f4ede4;
+      color:#2b1d14;
+      border-radius:50px;
+      text-decoration:none;
+      font-weight:600;
+      transition:0.35s;
+    }
+
+    .contact-btn:hover{
+      transform:translateY(-4px);
+    }
+
+    footer{
+      background:#24170f;
+      color:#cbb8a8;
+      text-align:center;
+      padding:30px;
+      font-size:0.95rem;
+    }
+
+    /* REVEAL ANIMATIONS */
+
+    .reveal{
+      opacity:0;
+      transform:translateY(70px);
+      transition:
+      opacity 1s ease,
+      transform 1s ease;
+    }
+
+    .reveal.active{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .reveal-left{
+      opacity:0;
+      transform:translateX(-80px);
+      transition:1s ease;
+    }
+
+    .reveal-left.active{
+      opacity:1;
+      transform:translateX(0);
+    }
+
+    .reveal-right{
+      opacity:0;
+      transform:translateX(80px);
+      transition:1s ease;
+    }
+
+    .reveal-right.active{
+      opacity:1;
+      transform:translateX(0);
+    }
+
+    /* HERO FLOAT */
+
+    @keyframes heroFloat{
+
+      0%{
+        transform:scale(1) translateY(0px);
+      }
+
+      50%{
+        transform:scale(1.02) translateY(-8px);
+      }
+
+      100%{
+        transform:scale(1) translateY(0px);
+      }
+
+    }
+
+    /* FADE */
+
+    @keyframes fadeUp{
+
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+
+    }
+
+    /* MOBILE */
+
+    @media(max-width:980px){
+
+      .about-grid{
+        grid-template-columns:1fr;
+      }
+
+      .top-right{
+        top:30%;
+        right:30px;
+        font-size:1rem;
+      }
+
+      .section-title{
+        font-size:3rem;
+      }
+
+      .contact-left h2{
+        font-size:2.8rem;
+      }
+
+    }
+
+    @media(max-width:768px){
+
+      .mobile-toggle{
+        display:flex;
+      }
+
+      nav{
+        align-items:flex-start;
+      }
+
+      .nav-left{
+        display:none;
+        position:absolute;
+        top:80px;
+        left:0;
+        width:100%;
+        flex-direction:column;
+        padding:20px;
+        border-radius:20px;
+        background:rgba(15,15,15,0.95);
+      }
+
+      .nav-left.active{
+        display:flex;
+      }
+
+      .hero{
+        height:95vh;
+      }
+
+      .hero-content{
+        padding:140px 25px 60px;
+      }
+
+      .name{
+        font-size:21vw;
+        letter-spacing:-5px;
+      }
+
+      .top-right{
+        position:relative;
+        top:auto;
+        right:auto;
+        margin-bottom:30px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <img src="4EBFEB96-5699-49E9-BE21-112981285FA2.JPG" alt="Dinse Davies">
+
+    <div class="overlay"></div>
+
+    <!-- NAV -->
+
+    <nav>
+
+      <div class="nav-left">
+
+        <a href="#about" class="nav-btn">About me</a>
+        <a href="#experience" class="nav-btn">Track record</a>
+        <a href="#skills" class="nav-btn">Expertise</a>
+
+      </div>
+
+      <a href="#contact" class="nav-btn">
+        Contact
+      </a>
+
+    </nav>
+
+    <!-- MOBILE -->
+
+    <div class="mobile-toggle" onclick="toggleMenu()">
+      ☰
+    </div>
+
+    <!-- HERO CONTENT -->
+
+    <div class="hero-content">
+
+      <div class="top-right">
+        Cybersecurity x <br>
+        Hospitality x Leadership
+      </div>
+
+      <div class="hero-bottom">
+
+        <div>
+
+          <div class="name">
+            DINSE
+          </div>
+
+          <div class="name bottom-name">
+            DAVIES
+          </div>
+
+        </div>
+
+        <div class="hero-actions">
+
+          <a href="CV.pdf" download class="download-btn">
+            ↓ Download CV
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+
+  <section class="about reveal" id="about">
+
+    <div class="about-grid">
+
+      <div class="about-text">
+
+        <h5>About Me</h5>
+
+        <h2 class="section-title">
+          About Me
+        </h2>
+
+        <p>
+          I am Dinse Davies, a professional based in Slovenia with
+          experience in hospitality management, logistics,
+          supervision, and cybersecurity training.
+          Passionate about leadership, communication,
+          and building modern digital experiences.
+        </p>
+
+      </div>
+
+      <div class="quote-card">
+
+        <div class="quote">“</div>
+
+        <p>
+          My focus is on combining technology,
+          cybersecurity knowledge, management,
+          and operational excellence into a strong professional career.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- EXPERIENCE -->
+
+  <section class="experience reveal-left" id="experience">
+
+    <h2 class="section-title">
+      Experience
+    </h2>
+
+    <div class="exp-grid">
+
+      <div class="exp-card">
+
+        <span>Current • Slovenia</span>
+
+        <h3>Housekeeping Supervisor</h3>
+
+        <p>
+          Managing teams, operations,
+          workflow efficiency, and guest satisfaction.
+        </p>
+
+      </div>
+
+      <div class="exp-card">
+
+        <span>GLS • Slovenia</span>
+
+        <h3>Logistics Operations</h3>
+
+        <p>
+          Parcel scanning, warehouse systems,
+          and inventory management.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- SKILLS -->
+
+  <section class="skills reveal-right" id="skills">
+
+    <h2 class="section-title">
+      Skills
+    </h2>
+
+    <div class="skills-wrap">
+
+      <div class="skill">Cybersecurity</div>
+      <div class="skill">Leadership</div>
+      <div class="skill">Networking</div>
+      <div class="skill">Operations</div>
+      <div class="skill">Hospitality</div>
+      <div class="skill">Problem Solving</div>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+
+  <section class="contact reveal" id="contact">
+
+    <div class="contact-container">
+
+      <div class="contact-left">
+
+        <h2>
+          Let’s Work Together
+        </h2>
+
+        <p>
+          Open to collaborations,
+          opportunities, and projects.
+        </p>
+
+      </div>
+
+      <div>
+
+        <p style="line-height:2.2; color:#d9c6b8; margin-bottom:30px;">
+
+          Ljubljana, Slovenia <br>
+          dinsedavies@gmail.com
+
+        </p>
+
+        <a href="mailto:dinsedavies@gmail.com" class="contact-btn">
+          Contact Me
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    © 2026 DinseDavies.com — All Rights Reserved
+  </footer>
+
+  <!-- SCRIPT -->
+
+  <script>
+
+    function toggleMenu(){
+      document.querySelector(".nav-left").classList.toggle("active");
+    }
+
+    /* REVEAL ON SCROLL */
+
+    function revealSections(){
+
+      const reveals = document.querySelectorAll(
+        ".reveal, .reveal-left, .reveal-right"
+      );
+
+      reveals.forEach((section)=>{
+
+        const windowHeight = window.innerHeight;
+        const revealTop = section.getBoundingClientRect().top;
+
+        if(revealTop < windowHeight - 100){
+          section.classList.add("active");
+        }
+
+      });
+
+    }
+
+    window.addEventListener("scroll", revealSections);
+
+    revealSections();
+
+  </script>
+
+</body>
+</html>
