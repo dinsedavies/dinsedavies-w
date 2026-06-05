@@ -462,7 +462,50 @@
 
     }
 
-    /* MOBILE */
+    
+/* PROJECTS */
+
+.projects{
+  background:#ece2d6;
+}
+
+.project-card{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:40px;
+  align-items:center;
+  background:#f6f0e8;
+  padding:35px;
+  border-radius:30px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.08);
+}
+
+.project-card img{
+  width:100%;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.project-info h3{
+  font-size:2rem;
+  margin-bottom:20px;
+}
+
+.project-details{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin:20px 0;
+}
+
+@media(max-width:900px){
+  .project-card{
+    grid-template-columns:1fr;
+  }
+}
+
+
+/* MOBILE */
 
     @media(max-width:980px){
 
@@ -557,6 +600,7 @@
         <a href="#about" class="nav-btn">About me</a>
         <a href="#experience" class="nav-btn">Track record</a>
         <a href="#skills" class="nav-btn">Expertise</a>
+        <a href="#projects" class="nav-btn">Projects</a>
 
       </div>
 
@@ -709,6 +753,47 @@
     </div>
 
   </section>
+
+  
+  <!-- PROJECTS -->
+
+  <section class="projects reveal" id="projects">
+
+    <h2 class="section-title">Projects</h2>
+
+    <div class="project-card">
+
+      <img src="DB.png" alt="Starbucks Dashboard">
+
+      <div class="project-info">
+
+        <h3>Starbucks Sales Performance Dashboard</h3>
+
+        <p>
+          Interactive Excel dashboard created to analyze Starbucks sales data
+          and provide business insights through KPIs and visualizations.
+        </p>
+
+        <div class="project-details">
+          <div><strong>Tools:</strong> Microsoft Excel, Pivot Tables, Pivot Charts, Slicers</div>
+          <div><strong>Revenue:</strong> €20,712.45</div>
+          <div><strong>Transactions:</strong> 1,000</div>
+          <div><strong>Average Sale:</strong> €20.71</div>
+          <div><strong>Units Sold:</strong> 4,353</div>
+        </div>
+
+        <p>
+          This dashboard helps identify monthly sales trends, product performance,
+          category analysis, and regional sales distribution. It demonstrates
+          data cleaning, dashboard design, KPI reporting, and business analysis skills.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
 
   <!-- CONTACT -->
 
